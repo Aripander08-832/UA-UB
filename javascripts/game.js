@@ -1443,12 +1443,12 @@ function maxAll() {
 function getGeneratorMultiplier(tier) {
 	if (player.generators[tier].bought==0) return new Decimal(0)
 		
-	var multi=Decimal.pow((tier==9&&player.supernovaUpgrades.includes(9)&&player.currentChallenge==0)?1.13:(tier==9&&player.transferUpgrades.includes(10))?1.1:(player.currentChallenge==1)?1.03:1.05,player.generators[tier].bought)
+	var multi=Decimal.pow((tier==9&&player.supernovaUpgrades.includes(9)&&player.currentChallenge==0)?1.13:(tier==9&&player.transferUpgrades.includes(10))?1.1:(player.currentChallenge==1)?1.03:1.15,player.generators[tier].bought)
 	multi=multi.times(player.prestigePower)
 	if (player.transferUpgrades.includes(1)&&player.generators[tier].amount.gte(10)) {
 		var log10=player.generators[tier].amount.log10()
 		if (log10<9007199254740992) log10=Math.floor(log10)
-		multi=multi.times(Decimal.pow(Decimal.pow(1.05,log10),player.currentChallenge==6?0.9:1))
+		multi=multi.times(Decimal.pow(Decimal.pow(1.15,log10),player.currentChallenge==6?0.9:1))
 	}
 	if (player.transferUpgrades.includes(2)) multi=multi.times(getUpgradeMultiplier('tupg2'))
 	if (player.transferUpgrades.includes(3)) multi=multi.times(getUpgradeMultiplier('tupg3'))
@@ -1464,9 +1464,9 @@ function getGeneratorMultiplier(tier) {
 	if (player.supernovaUpgrades.includes(13)&&!player.preSupernova) multi=multi.times(getUpgradeMultiplier('snupg13'))
 	if (player.supernovaUpgrades.includes(14)&&!player.preSupernova&&player.currentChallenge==0) multi=multi.times(10)
 	if (player.supernovaUpgrades.includes(15)&&!player.preSupernova) multi=multi.times(getUpgradeMultiplier('snupg15'))
-	if (player.supernovaUpgrades.includes(16)&&!player.preSupernova&&tier==0) multi=multi.times(Decimal.pow(1.05,player.generators[9].amount))
+	if (player.supernovaUpgrades.includes(16)&&!player.preSupernova&&tier==0) multi=multi.times(Decimal.pow(1.15,player.generators[9].amount))
 		
-	if (player.achievements.includes(1)&&!player.preSupernova&&tier==0) multi=multi.pow(1.05)
+	if (player.achievements.includes(1)&&!player.preSupernova&&tier==0) multi=multi.pow(1.15)
 	if (player.achievements.includes(2)&&!player.preSupernova&&tier==9) multi=multi.times(Decimal.pow(BigInteger.add(BigInteger.add(BigInteger.add(BigInteger.add(BigInteger.add(BigInteger.add(BigInteger.add(BigInteger.add(BigInteger.add(player.generators[0].bought,player.generators[1].bought),player.generators[2].bought),player.generators[3].bought),player.generators[4].bought),player.generators[5].bought),player.generators[6].bought),player.generators[7].bought),player.generators[8].bought),player.generators[9].bought),0.7))
 	if (player.achievements.includes(3)&&!player.preSupernova) multi=multi.times(Decimal.add(player.generators[0].bought,player.generators[1].bought).add(player.generators[2].bought).add(player.generators[3].bought).add(player.generators[4].bought).add(player.generators[5].bought).add(player.generators[6].bought).add(player.generators[7].bought).add(player.generators[8].bought).add(player.generators[9].bought).pow(0.1))
 	if (player.achievements.includes(4)&&!player.preSupernova&&tier==9) multi=multi.times(BigInteger.add(player.generators[0].bought,1))
