@@ -1112,7 +1112,7 @@ function reset(tier,challid=0,gain=1) {
 }
 
 function checkToReset(tier) {
-	if (tier==1&&player.stars.gte(player.transferUpgrades.includes(7)?1e38:1e39)&&getPrestigePower().gt(player.prestigePower)&&tab!='toomuch') reset(1)
+	if (tier==1&&player.stars.gte(player.transferUpgrades.includes(7)?1e33:1e34)&&getPrestigePower().gt(player.prestigePower)&&tab!='toomuch') reset(1)
 	if (tier==2&&player.prestigePower.gte(100)&&tab!='toomuch') reset(2)
 	if (tier==3&&player.stars.gte(Number.MAX_VALUE)) reset(3)
 }
@@ -2205,7 +2205,7 @@ function gameTick() {
 			} else {
 				updateTooltipBase('prestigePower','')
 			}
-			if (!showTooMuch&&player.stars.gte(player.transferUpgrades.includes(7)?1e38:1e39)&&player.prestigePower.lt(getPrestigePower())) {
+			if (!showTooMuch&&player.stars.gte(player.transferUpgrades.includes(7)?1e34:1e35)&&player.prestigePower.lt(getPrestigePower())) {
 				if (oldDesign) {
 					showElement('prestige1','inline')
 				} else {
